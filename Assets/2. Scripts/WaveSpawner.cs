@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class WaveSpawner : MonoBehaviour {
+public class WaveSpawner : MonoBehaviour 
+{
+	#region Variables to use: 
 
 	public enum SpawnState { SPAWNING, WAITING, COUNTING };
 
@@ -37,6 +39,10 @@ public class WaveSpawner : MonoBehaviour {
 	{
 		get { return state; }
 	}
+
+	#endregion
+
+	#region Methods to use:
 
 	void Start()
 	{
@@ -131,4 +137,5 @@ public class WaveSpawner : MonoBehaviour {
 		Instantiate(_enemy, _sp.position, _sp.rotation);
 	}
 
+    #endregion
 }
