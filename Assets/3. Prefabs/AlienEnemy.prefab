@@ -673,7 +673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0457039d61c70694dbf8abee74a5da97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuelPrefab: {fileID: 100000, guid: 0131770b238311041910d0a345caf914, type: 3}
+  fuelPrefab: {fileID: 579493450029617233, guid: f1d824661f4494c4ca1e1c5a99984660, type: 3}
   hurtSound: {fileID: 8300000, guid: 04ba428de06d9114abce58bb24856b12, type: 3}
   dead: 0
   attacking: 0
