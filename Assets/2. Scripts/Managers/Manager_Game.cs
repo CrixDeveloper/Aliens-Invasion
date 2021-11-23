@@ -9,6 +9,7 @@ public class Manager_Game : MonoBehaviour
     #region Variables to use: 
 
     public Health playerLife;
+    public int restartDelay = 10;
 
     [Header("References:")]
 
@@ -37,8 +38,7 @@ public class Manager_Game : MonoBehaviour
     {
         if (Manager_Countdown.secondsLeft == 0)
         {
-            Time.timeScale = 0;
-            SceneManager.LoadScene("GameOver");
+            GameOver();
         }
     }
 
@@ -46,8 +46,7 @@ public class Manager_Game : MonoBehaviour
     {
         if (playerLife.value == 0)
         {
-            Time.timeScale = 0;
-            SceneManager.LoadScene("GameOver");
+            GameOver();
         }
     }
 
@@ -60,5 +59,24 @@ public class Manager_Game : MonoBehaviour
             Destroy(popUpText, 10f);
         }
     }
+
+    private void GameOver()
+    {
+        Time.timeScale = 0;
+        SceneManager.LoadScene("GameOver");
+        Invoke("RestartGame", restartDelay);
+    }
+   
+    private void RestartGame()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void GameWin()
+    {
+        Time.timeScale = 0;
+        SceneManager.LoadScene("WinGame");
+        Invoke("RestartGame", restartDelay);
+    } 
     #endregion
 }
