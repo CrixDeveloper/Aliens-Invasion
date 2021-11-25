@@ -6,11 +6,18 @@ public class AirplaneEscape : MonoBehaviour
 {
     #region Variables to use: 
 
+    protected AudioSource audioSource;
     public GameObject popUpText;
-  
+    public AudioClip pickUpSound;
+
     #endregion
 
     #region Methods to use: 
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void OnTriggerStay (Collider other)
     {
@@ -24,6 +31,14 @@ public class AirplaneEscape : MonoBehaviour
             {
                 FindObjectOfType<Manager_Game>().GameWin();
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Collectable"))
+        {
+            audioSource.PlayOneShot(pickUpSound);
         }
     }
 

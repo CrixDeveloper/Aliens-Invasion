@@ -29,22 +29,22 @@ public class Manager_Game : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkLoseConditionOne();
+        //checkLoseConditionOne();
         checkLoseConditionTwo();
         checkEnergy();
     }
 
-    private void checkLoseConditionOne()
-    {
-        if (Manager_Countdown.secondsLeft == 0)
-        {
-            GameOver();
-        }
-    }
+    //private void checkLoseConditionOne()
+    //{
+    //    if (Manager_Countdown.secondsLeft == 0)
+    //    {
+    //        GameOver();
+    //    }
+    //}
 
     private void checkLoseConditionTwo()
     {
-        if (playerLife.value == 0)
+        if (Manager_Energy.energyCount == -15)
         {
             GameOver();
         }
@@ -52,7 +52,7 @@ public class Manager_Game : MonoBehaviour
 
     private void checkEnergy()
     {
-        if (Manager_Energy.energyCount == 50)
+        if (Manager_Energy.energyCount == 30)
         {
             airPlanePrefab.gameObject.SetActive(true);
             popUpText.gameObject.SetActive(true);

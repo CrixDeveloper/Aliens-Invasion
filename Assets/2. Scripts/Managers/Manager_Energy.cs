@@ -30,7 +30,7 @@ public class Manager_Energy : MonoBehaviour
     public void IncreaseEnergyNumber()
     {
         energyCount ++;
-        energyText.text = energyCount.ToString() + "";
+        energyText.text = energyCount.ToString() + " ";
     }
 
     #endregion

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy_Controller : MonoBehaviour
 {
@@ -13,10 +14,12 @@ public class Enemy_Controller : MonoBehaviour
     private Health playerLife;
     private Animator animator;
     protected AudioSource audioSource;
+    protected AudioSource audioSource2;
 
     [Header("References:")]
     public GameObject fuelPrefab;
-    public AudioClip hurtSound;
+    public AudioClip alienHurtSound;
+    public AudioClip playerHurtSound;
 
     [Header("Boolean Values:")]
     public bool dead = false;
@@ -37,6 +40,7 @@ public class Enemy_Controller : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerLife = player.GetComponent<Health>();
         audioSource = GetComponent<AudioSource>();
+        audioSource2 = GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
         enemyHealth = GetComponent<Health>();
         animator = GetComponent<Animator>();
@@ -63,7 +67,7 @@ public class Enemy_Controller : MonoBehaviour
 
         if (enemyHealth.value <= 0)
         {
-            audioSource.PlayOneShot(hurtSound);
+            audioSource.PlayOneShot(alienHurtSound);
             dead = true;
             agent.isStopped = true;
             animator.CrossFadeInFixedTime("Dead", 0.1f);
@@ -87,6 +91,10 @@ public class Enemy_Controller : MonoBehaviour
 
     private void AttackPlayer()
     {
+        Manager_Energy.energyCount -= 1;
+        FindObjectOfType<Manager_Energy>().GetComponent<Text>().text = " " + Manager_Energy.energyCount.ToString();
+
+        audioSource2.PlayOneShot(playerHurtSound);
         playerLife.TakeDamage(damage);
         agent.speed = 0;
         agent.angularSpeed = 0;

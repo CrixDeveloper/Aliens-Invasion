@@ -528,7 +528,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 90
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -566,7 +566,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -649,7 +649,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 8
+  m_Speed: 10
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -674,11 +674,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fuelPrefab: {fileID: 579493450029617233, guid: f1d824661f4494c4ca1e1c5a99984660, type: 3}
-  hurtSound: {fileID: 8300000, guid: 04ba428de06d9114abce58bb24856b12, type: 3}
+  alienHurtSound: {fileID: 8300000, guid: 04ba428de06d9114abce58bb24856b12, type: 3}
+  playerHurtSound: {fileID: 8300000, guid: eaf4ff5bfc719b24f898d8e921e15fb0, type: 3}
   dead: 0
   attacking: 0
   damage: 25
-  agentSpeed: 8
+  agentSpeed: 10
   agentAngularSpeed: 120
 --- !u!114 &-5437887263746421035
 MonoBehaviour:
