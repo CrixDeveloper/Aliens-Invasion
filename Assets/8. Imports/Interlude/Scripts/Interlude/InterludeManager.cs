@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -20,8 +21,8 @@ namespace Interlude
         private static InterludeManager instance;
 
         string serverIP = "104.154.68.222:8082";
-        int id = 1;
-        string password = "MSx9vARC9OhPrzAl";
+        int id = 6;
+        string password = "^9f1dZbMIZij11xBW^";
 
         public TextMeshProUGUI addressInput;
         string address;
@@ -37,8 +38,10 @@ namespace Interlude
         //harvest protocol fields
         int maxScore;
         int stakedAmount;
+        int sessionDuration;
         int startTime;
         int rewardRate;
+        int gameRewardCoef;
         string harvestReceipt;
 
         public UnityEvent OnConnectionError;
@@ -49,6 +52,12 @@ namespace Interlude
         * Interface
         ************************/
 
+        public static bool allowReceipt
+        {
+            get;
+            set;
+        }
+
         public static void KeyFound()
         {
             instance.StartCoroutine(instance.FetchKeyAndDisplay());
@@ -56,8 +65,25 @@ namespace Interlude
 
         public static void UpdateScore(int newScore)
         {
+            if (instance == null)
+            {
+                return;
+            }
             score = newScore;
             instance.UpdateShellDisplay();
+        }
+
+        public static int GetISHAmount(int score)
+        {
+            return instance.GetShellAmount(score);
+        }
+
+        public static void ShowReceipt()
+        {
+            if (!requestOngoing)
+            {
+                instance.StartCoroutine(instance.FetchHarvestReceiptAndDisplay());
+            }
         }
 
         /***********************
@@ -66,16 +92,16 @@ namespace Interlude
         private void Start()
         {
             instance = this;
+            allowReceipt = true;
             DontDestroyOnLoad(gameObject);
         }
 
         private void Update()
         {
-            if (gameProtocol == Protocol.Harvest)
+            if (gameProtocol == Protocol.Harvest && allowReceipt)
             {
                 if (Input.GetKeyDown(KeyCode.I) && !requestOngoing)
                 {
-                    requestOngoing = true;
                     StartCoroutine(FetchHarvestReceiptAndDisplay());
                 }
             }
@@ -83,7 +109,7 @@ namespace Interlude
 
         public void CheckPlayerInfo()
         {
-            if(gameProtocol == Protocol.ScavengerHunt)
+            if (gameProtocol == Protocol.ScavengerHunt)
             {
                 StartCoroutine(CheckPlayerInfoScavengerHunt());
             }
@@ -158,7 +184,7 @@ namespace Interlude
             else
             {
                 Debug.Log(www.downloadHandler.text);
-                key = www.downloadHandler.text.Substring(1, www.downloadHandler.text.Length-2);
+                key = www.downloadHandler.text.Substring(1, www.downloadHandler.text.Length - 2);
                 DisplayKey(id);
             }
             www.Dispose();
@@ -187,27 +213,38 @@ namespace Interlude
                 Debug.LogError(www.error);
                 OnConnectionError.Invoke();
             }
-            else if(www.downloadHandler.text == "error")
+            else if (www.downloadHandler.text == "error")
             {
                 OnNullTicket.Invoke();
             }
             else
             {
                 string info = CleanString(www.downloadHandler.text);
-                Debug.Log(info);
-                string[] infos = info.Split('|');
-                bool valid = infos[0] == "1";
-                stakedAmount = int.Parse(infos[1]);
-                maxScore = int.Parse(infos[2]);
-                startTime = int.Parse(infos[3]);
-                rewardRate = int.Parse(infos[4]);
-                if (!valid)
+                if (info == "error")
                 {
                     OnNullTicket.Invoke();
                 }
                 else
                 {
-                    SceneManager.LoadScene(1);
+                    string[] infos = info.Split('|');
+                    Debug.Log(info);
+                    sessionDuration = int.Parse(infos[0]);
+                    stakedAmount = int.Parse(infos[1]);
+                    maxScore = int.Parse(infos[2]);
+                    startTime = int.Parse(infos[3]);
+                    rewardRate = int.Parse(infos[4]);
+                    gameRewardCoef = int.Parse(infos[5]);
+                    int gameId = int.Parse(infos[6]);
+
+                    bool valid = id == gameId && stakedAmount > 0 && DateTimeOffset.Now.ToUnixTimeSeconds() < startTime + 60 * sessionDuration;
+                    if (!valid)
+                    {
+                        OnNullTicket.Invoke();
+                    }
+                    else
+                    {
+                        SceneManager.LoadScene(1);
+                    }
                 }
             }
 
@@ -216,6 +253,7 @@ namespace Interlude
 
         IEnumerator FetchHarvestReceiptAndDisplay()
         {
+            requestOngoing = true;
             int hash = GetStableHash(score.ToString() + startTime.ToString() + password);
             WWWForm form = new WWWForm();
             form.AddField("player", address);
@@ -290,7 +328,7 @@ namespace Interlude
 
         public int GetShellAmount(int score)
         {
-            return instance.stakedAmount * score / instance.maxScore * instance.rewardRate / (36 * 100);
+            return instance.stakedAmount * score / instance.maxScore * instance.rewardRate * instance.gameRewardCoef / (36 * 100 * 100);
         }
 
         public void CopyKeyToClipboard()
@@ -302,7 +340,7 @@ namespace Interlude
         {
             GUIUtility.systemCopyBuffer = instance.harvestReceipt;
         }
-        
+
         /************************
         * UI                    
         ************************/
@@ -331,11 +369,12 @@ namespace Interlude
         {
             animator.CrossFade("Menu Out", 0);
         }
-        
 
+        Coroutine closeWindowRoutine;
         void CloseWindowIn(int seconds, Animator animator)
         {
-            StartCoroutine(CloseWindowInRoutine(5, animator));
+            StopCoroutine("closeWindowRoutine");
+            closeWindowRoutine = StartCoroutine(CloseWindowInRoutine(5, animator));
         }
 
         IEnumerator CloseWindowInRoutine(int seconds, Animator animator)
