@@ -29,8 +29,6 @@ public class Energy_Controller : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Energy Picked Up");
-
             energyPrefab.gameObject.SetActive(false);
             FindObjectOfType<Manager_Energy>().IncreaseEnergyNumber();
         }
