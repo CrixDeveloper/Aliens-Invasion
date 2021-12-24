@@ -64,7 +64,6 @@ public class Manager_Game : MonoBehaviour
     {
         Time.timeScale = 0;
         SceneManager.LoadScene("GameOver");
-        Invoke("RestartGame", restartDelay);
     }
    
     private void RestartGame()
