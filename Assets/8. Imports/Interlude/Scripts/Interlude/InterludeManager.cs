@@ -21,8 +21,8 @@ namespace Interlude
         private static InterludeManager instance;
 
         string serverIP = "104.154.68.222:8082";
-        int id = 6;
-        string password = "^9f1dZbMIZij11xBW^";
+        int id = 9;
+        string password = "^qCxH99qlnvqC6XEh^";
 
         public TextMeshProUGUI addressInput;
         string address;
