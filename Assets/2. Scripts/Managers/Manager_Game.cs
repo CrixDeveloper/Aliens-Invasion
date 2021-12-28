@@ -29,20 +29,12 @@ public class Manager_Game : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //checkLoseConditionOne();
-        checkLoseConditionTwo();
+        
+        checkLoseCondition();
         checkEnergy();
     }
 
-    //private void checkLoseConditionOne()
-    //{
-    //    if (Manager_Countdown.secondsLeft == 0)
-    //    {
-    //        GameOver();
-    //    }
-    //}
-
-    private void checkLoseConditionTwo()
+    private void checkLoseCondition()
     {
         if (Manager_Energy.energyCount == -15)
         {
@@ -62,20 +54,13 @@ public class Manager_Game : MonoBehaviour
 
     private void GameOver()
     {
-        Time.timeScale = 0;
         SceneManager.LoadScene("GameOver");
-    }
-   
-    private void RestartGame()
-    {
-        SceneManager.LoadScene("MainMenu");
     }
 
     public void GameWin()
     {
-        Time.timeScale = 0;
         SceneManager.LoadScene("WinGame");
-        Invoke("RestartGame", restartDelay);
     } 
+
     #endregion
 }
