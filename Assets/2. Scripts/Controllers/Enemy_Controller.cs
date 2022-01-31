@@ -8,6 +8,7 @@ public class Enemy_Controller : MonoBehaviour
 {
     #region Variables to use: 
 
+    // Private Variables: 
     private GameObject player;
     private NavMeshAgent agent;
     private Health enemyHealth;
@@ -83,7 +84,7 @@ public class Enemy_Controller : MonoBehaviour
         if (attacking) return;
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 
-        if (distanceToPlayer <= 4.0)
+        if (distanceToPlayer <= 4.0 * Time.deltaTime)
         {
             AttackPlayer();
         }
@@ -96,8 +97,8 @@ public class Enemy_Controller : MonoBehaviour
 
         audioSource2.PlayOneShot(playerHurtSound);
         playerLife.TakeDamage(damage);
-        agent.speed = 0;
-        agent.angularSpeed = 0;
+        agent.speed = 0 * Time.deltaTime;
+        agent.angularSpeed = 0 * Time.deltaTime;
         attacking = true;
         animator.SetTrigger("MustAttack");
         Invoke("RestartAttack", 2f);
@@ -106,8 +107,8 @@ public class Enemy_Controller : MonoBehaviour
     private void RestartAttack()
     {
         attacking = false;
-        agent.speed = agentSpeed;
-        agent.angularSpeed = agentAngularSpeed;
+        agent.speed = agentSpeed * Time.deltaTime;
+        agent.angularSpeed = agentAngularSpeed * Time.deltaTime;
     }
 
     #endregion
