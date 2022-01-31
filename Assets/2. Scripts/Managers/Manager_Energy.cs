@@ -30,8 +30,6 @@ public class Manager_Energy : MonoBehaviour
     public void IncreaseEnergyNumber()
     {
         energyCount ++;
-        Interlude.InterludeManager.UpdateScore(energyCount);
-        Debug.Log("ISH Coin Earned");
         energyText.text = energyCount.ToString() + " ";
     }
 

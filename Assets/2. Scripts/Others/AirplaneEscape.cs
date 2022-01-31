@@ -29,6 +29,7 @@ public class AirplaneEscape : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                Interlude.InterludeManager.KeyFound();
                 FindObjectOfType<Manager_Game>().GameWin();
             }
         }

@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/8. Imports/Interlude/Scenes/InterludeMenu.unity
-    guid: 06ece82dbd9ad1d4f982343c5c85438b
+    path: Assets/Interlude/Scenes/InterludeMenu.unity
+    guid: 0c3bf9bf68d86cf44a28cd05a8032b36
   - enabled: 1
     path: Assets/1. Scenes/MainMenu.unity
     guid: ba5afa91e1ca2dd4894656153c5b649f
