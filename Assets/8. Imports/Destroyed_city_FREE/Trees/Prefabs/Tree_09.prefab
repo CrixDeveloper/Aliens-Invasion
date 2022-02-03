@@ -84,7 +84,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -104,8 +104,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.808641, y: 22.609184, z: 2.9317722}
-  m_Center: {x: -0.6747596, y: 10.304592, z: -0.4071529}
+  m_Size: {x: 1.3528154, y: 11.32394, z: 1.5415425}
+  m_Center: {x: 0.053153068, y: 4.66197, z: -0.2503301}
 --- !u!21 &2100000
 Material:
   serializedVersion: 6

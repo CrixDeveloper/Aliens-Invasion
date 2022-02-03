@@ -30,6 +30,7 @@ public class Enemy_Controller : MonoBehaviour
     public float damage = 25f;
     public float agentSpeed = 8f;
     public float agentAngularSpeed = 120f;
+    public float timeLastAttack;
 
     #endregion
 
@@ -80,11 +81,13 @@ public class Enemy_Controller : MonoBehaviour
 
     private void CheckAttack()
     {
+        if (Time.time < timeLastAttack + 1) return;
+
         if (dead) return;
         if (attacking) return;
         float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 
-        if (distanceToPlayer <= 4.0 * Time.deltaTime)
+        if (distanceToPlayer <= 4.0)
         {
             AttackPlayer();
         }
@@ -92,13 +95,14 @@ public class Enemy_Controller : MonoBehaviour
 
     private void AttackPlayer()
     {
+        timeLastAttack = Time.time;
         Manager_Energy.energyCount -= 1;
         FindObjectOfType<Manager_Energy>().GetComponent<Text>().text = " " + Manager_Energy.energyCount.ToString();
 
         audioSource2.PlayOneShot(playerHurtSound);
         playerLife.TakeDamage(damage);
-        agent.speed = 0 * Time.deltaTime;
-        agent.angularSpeed = 0 * Time.deltaTime;
+        agent.speed = 0;
+        agent.angularSpeed = 0;
         attacking = true;
         animator.SetTrigger("MustAttack");
         Invoke("RestartAttack", 2f);
@@ -107,8 +111,8 @@ public class Enemy_Controller : MonoBehaviour
     private void RestartAttack()
     {
         attacking = false;
-        agent.speed = agentSpeed * Time.deltaTime;
-        agent.angularSpeed = agentAngularSpeed * Time.deltaTime;
+        agent.speed = agentSpeed;
+        agent.angularSpeed = agentAngularSpeed;
     }
 
     #endregion
