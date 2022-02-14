@@ -48,7 +48,7 @@ public class Manager_Game : MonoBehaviour
         {
             airPlanePrefab.gameObject.SetActive(true);
             popUpText.gameObject.SetActive(true);
-            Destroy(popUpText, 10f);
+            Destroy(popUpText, 30f);
         }
     }
 

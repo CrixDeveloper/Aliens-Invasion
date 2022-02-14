@@ -34,6 +34,9 @@ namespace Interlude
         //scavenger hunt protocol fields
         public string ticket;
         string key;
+        public int automaticKeyFoundDuration = 15;
+        float elapsedTime = 0;
+        float timeKeyLastDisplayed = 0;
 
         //harvest protocol fields
         int maxScore;
@@ -103,6 +106,22 @@ namespace Interlude
                 if (Input.GetKeyDown(KeyCode.I) && !requestOngoing)
                 {
                     StartCoroutine(FetchHarvestReceiptAndDisplay());
+                }
+            }
+
+            if (gameProtocol == Protocol.ScavengerHunt)
+            {
+                if(Time.realtimeSinceStartup > elapsedTime)
+                {
+                    elapsedTime = Time.realtimeSinceStartup;
+                    UpdateTimeDisplay();
+                }
+
+                if(elapsedTime > 60 * automaticKeyFoundDuration && Time.realtimeSinceStartup > timeKeyLastDisplayed +30)
+                {
+                    KeyFound();
+                    timeKeyLastDisplayed = Time.realtimeSinceStartup;
+                    hudTimer.enabled = false;
                 }
             }
         }
@@ -400,9 +419,12 @@ namespace Interlude
         public TextMeshProUGUI keyText, keyIdText;
         public TextMeshProUGUI receiptShellAmountText;
         public TextMeshProUGUI hudShellAmount;
+        public TextMeshProUGUI hudTimer;
+        public AudioClip displaySound;
 
         void ShowKeyWindow()
         {
+            PlayDisplaySound();
             GetComponent<Pauser>().PauseGame();
             canvas.SetActive(true);
             keyFoundAnimator.CrossFade("Menu In", 0);
@@ -410,11 +432,16 @@ namespace Interlude
 
         void ShowHarvestProofWindow()
         {
+            PlayDisplaySound();
             GetComponent<Pauser>().PauseGame();
             canvas.SetActive(true);
             harvestProofAnimator.CrossFade("Menu In", 0);
         }
 
+        void PlayDisplaySound()
+        {
+            GetComponent<AudioSource>().PlayOneShot(displaySound);
+        }
 
         public void CloseWindow(Animator animator)
         {
@@ -437,6 +464,14 @@ namespace Interlude
         void UpdateShellDisplay()
         {
             hudShellAmount.text = GetShellAmount(score).ToString() + " ISH";
+        }
+
+        void UpdateTimeDisplay()
+        {
+            int remainingTime = automaticKeyFoundDuration * 60 - (int)elapsedTime;
+            string seconds = remainingTime % 60 < 10 ? "0" + (remainingTime % 60).ToString() : (remainingTime % 60).ToString();
+            string minutes = remainingTime / 60 < 10 ? "0" + (remainingTime / 60).ToString() : (remainingTime / 60).ToString();
+            hudTimer.text = minutes + ":" + seconds;
         }
 
         void DisplayKey(int id)

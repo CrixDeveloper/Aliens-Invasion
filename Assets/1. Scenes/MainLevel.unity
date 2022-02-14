@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5875657, g: 0.685671, b: 0.7377422, a: 1}
+  m_IndirectSpecularColor: {r: 0.5874198, g: 0.68568504, b: 0.73745996, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -1109,12 +1109,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 897243571}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -567, y: -277}
-  m_SizeDelta: {x: 60, y: 60}
+  m_AnchoredPosition: {x: -827.3816, y: -380.07028}
+  m_SizeDelta: {x: 65.2368, y: 82.1406}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &142936724
 MonoBehaviour:
@@ -5507,9 +5507,9 @@ RectTransform:
   - {fileID: 439341701}
   - {fileID: 1501827678}
   - {fileID: 1568239532}
+  - {fileID: 142936723}
   - {fileID: 1896823187}
   - {fileID: 957161226}
-  - {fileID: 142936723}
   m_Father: {fileID: 1010479640}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5666,7 +5666,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 897243571}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -10377,8 +10377,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -454, y: -332}
-  m_SizeDelta: {x: 70.7356, y: 48.1456}
+  m_AnchoredPosition: {x: -708.88293, y: -436.91534}
+  m_SizeDelta: {x: 76.9094, y: 65.9118}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1501827679
 MonoBehaviour:
@@ -11128,8 +11128,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -390, y: -332}
-  m_SizeDelta: {x: 54.9779, y: 48.1456}
+  m_AnchoredPosition: {x: -639.297, y: -436.91534}
+  m_SizeDelta: {x: 59.7764, y: 65.9118}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1568239533
 MonoBehaviour:
@@ -13985,12 +13985,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 897243571}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 273.3354, y: 48.1456}
+  m_AnchoredPosition: {x: 0, y: 366.54}
+  m_SizeDelta: {x: 300, y: 146.93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1896823188
 MonoBehaviour:
@@ -14014,7 +14014,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7cb2912222469634ba17a77055919ea8, type: 3}
-    m_FontSize: 30
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -14025,7 +14025,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: You got enough energy to escape. Look Up! and find the big yellow LED light!
+  m_Text: 'You got enough energy to escape.
+
+    Look Up! and find the big yellow
+    LED light!'
 --- !u!222 &1896823189
 CanvasRenderer:
   m_ObjectHideFlags: 0
