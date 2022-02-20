@@ -239,7 +239,7 @@ MonoBehaviour:
   - ItemDefinition: {fileID: 114982450061250758, guid: 5481010ef14c32f4cb7b6661b0c59fb4, type: 2}
     Amount: 1
   - ItemDefinition: {fileID: 114575177125770392, guid: 5481010ef14c32f4cb7b6661b0c59fb4, type: 2}
-    Amount: 36
+    Amount: 60
 --- !u!114 &6295438608451487833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,8 +259,8 @@ MonoBehaviour:
     m_Default: 1
   m_PositioningMode: 1
   m_Grouping: -1
-  m_MinRespawnTime: 20
-  m_MaxRespawnTime: 30
+  m_MinRespawnTime: 15
+  m_MaxRespawnTime: 20
   m_ScheduleRespawnOnDeath: 1
   m_ScheduleRespawnOnDisable: 1
   m_RespawnAudioClipSet:

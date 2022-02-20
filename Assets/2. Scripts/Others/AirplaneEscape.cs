@@ -19,6 +19,13 @@ public class AirplaneEscape : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Collidable"))
+        {
+            popUpText.gameObject.SetActive(true);
+        }
+    }
     private void OnTriggerStay (Collider other)
     {
         if (other.gameObject.CompareTag("Collidable"))
@@ -32,6 +39,13 @@ public class AirplaneEscape : MonoBehaviour
                 Interlude.InterludeManager.KeyFound();
                 FindObjectOfType<Manager_Game>().GameWin();
             }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Collidable"))
+        {
+            popUpText.gameObject.SetActive(false);
         }
     }
 
