@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/8. Imports/Interlude/Interlude/Scenes/InterludeMenu.unity
     guid: 0c3bf9bf68d86cf44a28cd05a8032b36
   - enabled: 1
